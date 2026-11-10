@@ -24,5 +24,6 @@ window/stretch/aspect="expand"
 3d/physics_engine="Jolt Physics"
 
 [rendering]
+environment/defaults/default_clear_color=Color(1, 0, 0, 1)
 
 rendering_device/driver.windows="d3d12"
