@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://enemyexperiment.png" id="1_texture"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_enemy"]
+points = PackedVector2Array(-9, -70, -83, 50, 64, 50)
+
+[node name="Enemy" type="StaticBody2D" groups=["enemy"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_texture")
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_enemy")

@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/woodplatform.png" id="1_texture"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wood_platform"]
+size = Vector2(453, 67)
+
+[node name="WoodPlatform" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_texture")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(248, 147)
+shape = SubResource("RectangleShape2D_wood_platform")

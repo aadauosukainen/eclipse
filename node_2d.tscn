@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://bup2iq2wnapwt"]
+
+[ext_resource type="Texture2D" uid="uid://dv11vhn5g5rsm" path="res://assets/bg1.png" id="1_bg1"]
+[ext_resource type="Texture2D" uid="uid://c1g5jxxwi03vq" path="res://assets/bg2.png" id="2_bg2"]
+[ext_resource type="Texture2D" uid="uid://c4gmbhxhgk27x" path="res://assets/bg3.png" id="3_bg3"]
+[ext_resource type="PackedScene" path="res://player.tscn" id="4_player"]
+[ext_resource type="Texture2D" uid="uid://ctes8igd4ie4f" path="res://assets/b-port.png" id="5_kdubu"]
+[ext_resource type="Texture2D" uid="uid://crmgrb8q1k6fj" path="res://assets/r-port.png" id="6_d21ai"]
+[ext_resource type="PackedScene" path="res://weapon_pickup.tscn" id="7_weapon_pickup"]
+[ext_resource type="PackedScene" path="res://enemy.tscn" id="8_enemy"]
+
+[node name="Node2D" type="Node2D" unique_id=1750170680]
+
+[node name="BG1_Far" type="Parallax2D" parent="." unique_id=1446507091]
+scroll_scale = Vector2(0.15, 1)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BG1_Far" unique_id=158255060]
+texture = ExtResource("1_bg1")
+centered = false
+
+[node name="BG2_Mid" type="Parallax2D" parent="." unique_id=1408481906]
+scroll_scale = Vector2(0.35, 1)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BG2_Mid" unique_id=1349309404]
+texture = ExtResource("2_bg2")
+centered = false
+
+[node name="BG3_Near" type="Parallax2D" parent="." unique_id=2109086385]
+scroll_scale = Vector2(0.6, 1)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BG3_Near" unique_id=439175311]
+texture = ExtResource("3_bg3")
+centered = false
+
+[node name="Player" parent="." unique_id=952867895 instance=ExtResource("4_player")]
+position = Vector2(370, 816)
+
+[node name="WeaponPickup" parent="." unique_id=1869509812 instance=ExtResource("7_weapon_pickup")]
+position = Vector2(680, 695)
+
+[node name="Enemy" parent="." unique_id=1588511154 instance=ExtResource("8_enemy")]
+position = Vector2(1000, 700)
+
+[node name="Enemy2" parent="." unique_id=1659697492 instance=ExtResource("8_enemy")]
+position = Vector2(2300, 700)
+
+[node name="Enemy3" parent="." unique_id=1731758513 instance=ExtResource("8_enemy")]
+position = Vector2(3600, 700)
+
+[node name="Enemy4" parent="." unique_id=422817013 instance=ExtResource("8_enemy")]
+position = Vector2(4900, 700)
+
+[node name="BPort" type="Sprite2D" parent="." unique_id=1250777821]
+position = Vector2(58, 519)
+texture = ExtResource("5_kdubu")
+
+[node name="RPort" type="Sprite2D" parent="." unique_id=646738320]
+position = Vector2(5235, 550)
+texture = ExtResource("6_d21ai")
