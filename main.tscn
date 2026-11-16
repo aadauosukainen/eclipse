@@ -26,16 +26,17 @@
 [ext_resource type="Texture2D" uid="uid://q116g018xiii" path="res://assets/reddimension.png" id="30_red_dimension"]
 [ext_resource type="Texture2D" uid="uid://cx8mf5o33ecr5" path="res://assets/bluedimension.png" id="31_blue_dimension"]
 [ext_resource type="Script" uid="uid://beeks8xwfaq1q" path="res://parallax_background.gd" id="32_background"]
-
 [ext_resource type="PackedScene" path="res://game_screens.tscn" id="33_screens"]
 [ext_resource type="PackedScene" path="res://red_portal.tscn" id="34_red_portal"]
 [ext_resource type="PackedScene" path="res://platform_message.tscn" id="35_platform_message"]
 [ext_resource type="PackedScene" path="res://bloom_heartbeat.tscn" id="36_heartbeat"]
-
 [ext_resource type="AudioStream" path="res://assets/piano_ambience_loop.res" id="37_ambience"]
+[ext_resource type="AudioStream" uid="uid://ctnh3kkkvuvou" path="res://assets/rainforest_ambience.mp3" id="38_rainforest"]
+[ext_resource type="Script" uid="uid://b4nt230lvaqef" path="res://environment_ambience.gd" id="39_ambience_script"]
+[ext_resource type="PackedScene" path="res://bloom_counter.tscn" id="40_bloom_counter"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_first_platform_message"]
-size = Vector2(300, 40)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_level_ceiling"]
+size = Vector2(6528, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_creature"]
 animations = [{
@@ -74,7 +75,10 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lswn8"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_first_platform_message"]
+size = Vector2(300, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4k2k6"]
 resource_local_to_scene = true
 size = Vector2(36.3, 112.35)
 
@@ -113,6 +117,12 @@ texture = ExtResource("3_bg3")
 centered = false
 
 [node name="LevelGeometry" type="Node2D" parent="." unique_id=116186528]
+
+[node name="LevelCeiling" type="StaticBody2D" parent="LevelGeometry" unique_id=1253174099]
+position = Vector2(3200, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/LevelCeiling" unique_id=378356048]
+shape = SubResource("RectangleShape2D_level_ceiling")
 
 [node name="TreeBackground" type="Sprite2D" parent="LevelGeometry" unique_id=1409693726]
 modulate = Color(0.5, 0.5, 0.5, 1)
@@ -228,7 +238,7 @@ texture = ExtResource("30_red_dimension")
 centered = false
 flip_h = true
 
-[node name="RedPortalTrigger" parent="LevelGeometry/RedPortalHue" instance=ExtResource("34_red_portal")]
+[node name="RedPortalTrigger" parent="LevelGeometry/RedPortalHue" unique_id=1474846661 instance=ExtResource("34_red_portal")]
 position = Vector2(290, 212)
 
 [node name="PortalStructure2" parent="LevelGeometry" unique_id=1032334669 instance=ExtResource("27_portal_structure")]
@@ -288,7 +298,7 @@ scale = Vector2(0.6855873, 0.6168304)
 position = Vector2(4846, 273.00003)
 scale = Vector2(0.65418535, 0.67174286)
 
-[node name="FirstPlatformMessage" parent="LevelGeometry" instance=ExtResource("35_platform_message")]
+[node name="FirstPlatformMessage" parent="LevelGeometry" unique_id=1717822097 instance=ExtResource("35_platform_message")]
 position = Vector2(480, 883)
 
 [node name="LandingShape" parent="LevelGeometry/FirstPlatformMessage" index="0"]
@@ -307,7 +317,7 @@ scale = Vector2(0.7437046, 0.64884424)
 [node name="CollisionShape2D" parent="Actors/Player" index="1"]
 position = Vector2(14.254038, -66.811386)
 scale = Vector2(5.6120915, 3.8403888)
-shape = SubResource("RectangleShape2D_lswn8")
+shape = SubResource("RectangleShape2D_4k2k6")
 
 [node name="WeaponPickup" parent="Actors" unique_id=697428671 instance=ExtResource("8_weapon_pickup")]
 position = Vector2(1723, 565)
@@ -354,22 +364,25 @@ scale = Vector2(-0.5, 0.5)
 
 [node name="Portals" type="Node2D" parent="." unique_id=1625588355]
 
-[node name="GameScreens" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("33_screens")]
-music_player = NodePath("../PianoAmbience")
+[node name="GameScreens" parent="." unique_id=1721667407 node_paths=PackedStringArray("music_player") instance=ExtResource("33_screens")]
+music_player = NodePath("../EnvironmentAmbience")
 
-[node name="BloomHeartbeat" parent="." instance=ExtResource("36_heartbeat")]
+[node name="BloomHeartbeat" parent="." unique_id=215921223 instance=ExtResource("36_heartbeat")]
+
+[node name="BloomCounter" parent="." unique_id=705317124 instance=ExtResource("40_bloom_counter")]
+
+[node name="EnvironmentAmbience" type="AudioStreamPlayer" parent="." unique_id=79665069]
+process_mode = 3
+stream = ExtResource("38_rainforest")
+volume_db = 10.0
+autoplay = true
+script = ExtResource("39_ambience_script")
+death_stream = ExtResource("37_ambience")
+
+[connection signal="died" from="Actors/Player" to="Background" method="_on_player_died"]
+[connection signal="died" from="Actors/Player" to="EnvironmentAmbience" method="_on_player_died"]
 
 [editable path="LevelGeometry/PortalStructure"]
 [editable path="LevelGeometry/PortalStructure2"]
-[editable path="Actors/Player"]
-
-[node name="PianoAmbience" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-stream = ExtResource("37_ambience")
-pitch_scale = 0.9
-volume_db = -28.0
-autoplay = true
-
 [editable path="LevelGeometry/FirstPlatformMessage"]
-
-[connection signal="died" from="Actors/Player" to="Background" method="_on_player_died"]
+[editable path="Actors/Player"]

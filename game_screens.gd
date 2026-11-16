@@ -99,7 +99,4 @@ func _on_music_volume_changed(value: float) -> void:
 	music_volume = value
 	music_value.text = "%d%%" % int(value)
 	if is_instance_valid(music_player):
-		if value == 0.0:
-			music_player.volume_linear = 0.0
-		else:
-			music_player.volume_db = lerpf(-50.0, 0.0, value / 100.0)
+		music_player.call("set_music_volume", value)
