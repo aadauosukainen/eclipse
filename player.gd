@@ -156,7 +156,6 @@ func _physics_process(_delta: float) -> void:
 				push_direction = -signf(velocity.x)
 			knockback_velocity_x = push_direction * 350.0
 	position.x = clampf(position.x, PLAYER_RADIUS, world_size.x - PLAYER_RADIUS)
-	position.y = maxf(position.y, PLAYER_RADIUS)
 	if position.y > world_size.y + PLAYER_RADIUS:
 		_respawn()
 

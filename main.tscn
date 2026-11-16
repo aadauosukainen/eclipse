@@ -119,7 +119,7 @@ centered = false
 [node name="LevelGeometry" type="Node2D" parent="." unique_id=116186528]
 
 [node name="LevelCeiling" type="StaticBody2D" parent="LevelGeometry" unique_id=1253174099]
-position = Vector2(3200, -32)
+position = Vector2(3200, -192)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelGeometry/LevelCeiling" unique_id=378356048]
 shape = SubResource("RectangleShape2D_level_ceiling")

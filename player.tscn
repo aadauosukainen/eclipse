@@ -179,6 +179,7 @@ resource_local_to_scene = true
 size = Vector2(36.3, 112.35)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 1
 script = ExtResource("1_script")
 floor_snap_length = 14.0
 
