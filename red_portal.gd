@@ -4,5 +4,5 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.has_method("complete_level"):
-		body.complete_level()
+	if body.is_in_group("player") and body.has_method("enter_end_portal"):
+		body.enter_end_portal($ExitDestination.global_position)

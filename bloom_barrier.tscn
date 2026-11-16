@@ -1,0 +1,82 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/bloom_barrier_idle_1.png" id="1_frame_1"]
+[ext_resource type="Texture2D" path="res://assets/bloom_barrier_idle_2.png" id="2_frame_2"]
+[ext_resource type="Texture2D" path="res://assets/bloom_barrier_idle_3.png" id="3_frame_3"]
+[ext_resource type="Texture2D" path="res://assets/bloom_barrier_death_1.png" id="4_death_1"]
+[ext_resource type="Texture2D" path="res://assets/bloom_barrier_death_2.png" id="5_death_2"]
+[ext_resource type="Texture2D" path="res://assets/bloom_barrier_death_3.png" id="6_death_3"]
+[ext_resource type="Texture2D" path="res://assets/bloom_barrier_death_4.png" id="7_death_4"]
+[ext_resource type="Texture2D" path="res://assets/bloom_barrier_death_5.png" id="8_death_5"]
+[ext_resource type="Script" path="res://bloom_barrier.gd" id="9_script"]
+
+[ext_resource type="AudioStream" path="res://assets/bloom_barrier_death.wav" id="10_death_sound"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bloom_barrier"]
+animations = [{
+"frames": [{
+"duration": 0.25,
+"texture": ExtResource("1_frame_1")
+}, {
+"duration": 0.25,
+"texture": ExtResource("2_frame_2")
+}, {
+"duration": 0.25,
+"texture": ExtResource("3_frame_3")
+}, {
+"duration": 0.25,
+"texture": ExtResource("2_frame_2")
+}, {
+"duration": 1.25,
+"texture": ExtResource("1_frame_1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 0.12,
+"texture": ExtResource("4_death_1")
+}, {
+"duration": 0.12,
+"texture": ExtResource("5_death_2")
+}, {
+"duration": 0.12,
+"texture": ExtResource("6_death_3")
+}, {
+"duration": 0.12,
+"texture": ExtResource("7_death_4")
+}, {
+"duration": 0.12,
+"texture": ExtResource("8_death_5")
+}],
+"loop": false,
+"name": &"death",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bloom_barrier"]
+size = Vector2(150, 470)
+
+[node name="BloomBarrier" type="StaticBody2D"]
+script = ExtResource("9_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["bloom_pulse"]]
+position = Vector2(-250, -480)
+sprite_frames = SubResource("SpriteFrames_bloom_barrier")
+animation = &"idle"
+autoplay = "idle"
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -237)
+shape = SubResource("RectangleShape2D_bloom_barrier")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -240)
+rect = Rect2(-85, -240, 170, 480)
+
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_death_sound")
+volume_db = -3.0

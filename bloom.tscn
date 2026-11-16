@@ -1,0 +1,75 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/bloom_idle_1.png" id="1_idle_1"]
+[ext_resource type="Texture2D" path="res://assets/bloom_idle_2.png" id="2_idle_2"]
+[ext_resource type="Texture2D" path="res://assets/bloom_idle_3.png" id="3_idle_3"]
+[ext_resource type="Texture2D" path="res://assets/bloom_death_1.png" id="4_death_1"]
+[ext_resource type="Texture2D" path="res://assets/bloom_death_2.png" id="5_death_2"]
+[ext_resource type="Texture2D" path="res://assets/bloom_death_3.png" id="6_death_3"]
+[ext_resource type="Texture2D" path="res://assets/bloom_death_4.png" id="7_death_4"]
+[ext_resource type="Texture2D" path="res://assets/bloom_death_5.png" id="8_death_5"]
+[ext_resource type="Texture2D" path="res://assets/bloom_death_6.png" id="9_death_6"]
+[ext_resource type="Script" path="res://bloom.gd" id="10_script"]
+
+[ext_resource type="AudioStream" path="res://assets/bloom_death.mp3" id="11_death_sound"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bloom"]
+animations = [{
+"frames": [{
+"duration": 0.25,
+"texture": ExtResource("1_idle_1")
+}, {
+"duration": 0.25,
+"texture": ExtResource("2_idle_2")
+}, {
+"duration": 0.25,
+"texture": ExtResource("3_idle_3")
+}, {
+"duration": 0.25,
+"texture": ExtResource("2_idle_2")
+}, {
+"duration": 1.25,
+"texture": ExtResource("1_idle_1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 0.12,
+"texture": ExtResource("4_death_1")
+}, {
+"duration": 0.12,
+"texture": ExtResource("5_death_2")
+}, {
+"duration": 0.12,
+"texture": ExtResource("6_death_3")
+}, {
+"duration": 0.12,
+"texture": ExtResource("7_death_4")
+}, {
+"duration": 0.12,
+"texture": ExtResource("8_death_5")
+}, {
+"duration": 0.12,
+"texture": ExtResource("9_death_6")
+}],
+"loop": false,
+"name": &"death",
+"speed": 1.0
+}]
+
+[node name="Bloom" type="Node2D"]
+script = ExtResource("10_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["bloom_pulse"]]
+position = Vector2(-250, -448)
+sprite_frames = SubResource("SpriteFrames_bloom")
+animation = &"idle"
+autoplay = "idle"
+centered = false
+
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_death_sound")
+volume_db = -8.0

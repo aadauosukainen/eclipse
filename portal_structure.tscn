@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/portal-grayscale.png" id="1_texture"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_post"]
+size = Vector2(46, 230)
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ramp"]
+points = PackedVector2Array(0, 0, 96, 44, 0, 44)
+
+[node name="PortalStructure" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+modulate = Color(0.8, 0.8, 0.8, 1)
+texture = ExtResource("1_texture")
+centered = false
+
+[node name="PostCollision" type="CollisionShape2D" parent="."]
+position = Vector2(221, 653)
+shape = SubResource("RectangleShape2D_post")
+
+[node name="RampCollision" type="CollisionShape2D" parent="."]
+position = Vector2(244, 766)
+shape = SubResource("ConvexPolygonShape2D_ramp")

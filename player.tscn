@@ -1,22 +1,194 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=30 format=3]
 
 [ext_resource type="Script" path="res://player.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/player_character.png" id="2_texture"]
-[ext_resource type="Texture2D" path="res://assets/mysteryfox.png" id="3_death_screen"]
+[ext_resource type="Texture2D" path="res://assets/player_idle.png" id="2_texture"]
+[ext_resource type="PackedScene" path="res://death_screen.tscn" id="3_death_screen"]
+[ext_resource type="Texture2D" path="res://assets/player_run_1.png" id="4_run_1"]
+[ext_resource type="Texture2D" path="res://assets/player_run_2.png" id="5_run_2"]
+[ext_resource type="Texture2D" path="res://assets/player_run_3.png" id="6_run_3"]
+[ext_resource type="Texture2D" path="res://assets/player_run_4.png" id="7_run_4"]
+[ext_resource type="Texture2D" path="res://assets/player_idle_armed.png" id="8_armed_idle"]
+[ext_resource type="Texture2D" path="res://assets/player_run_armed_1.png" id="9_armed_run_1"]
+[ext_resource type="Texture2D" path="res://assets/player_run_armed_2.png" id="10_armed_run_2"]
+[ext_resource type="Texture2D" path="res://assets/player_run_armed_3.png" id="11_armed_run_3"]
+[ext_resource type="Texture2D" path="res://assets/player_run_armed_4.png" id="12_armed_run_4"]
+[ext_resource type="Texture2D" path="res://assets/player_jump_1.png" id="13_jump_1"]
+[ext_resource type="Texture2D" path="res://assets/player_jump_2.png" id="14_jump_2"]
+[ext_resource type="Texture2D" path="res://assets/player_jump_armed_1.png" id="15_jump_armed_1"]
+[ext_resource type="Texture2D" path="res://assets/player_jump_armed_2.png" id="16_jump_armed_2"]
+[ext_resource type="Texture2D" path="res://assets/player_attack_1.png" id="17_attack_1"]
+[ext_resource type="Texture2D" path="res://assets/player_attack_2.png" id="18_attack_2"]
+[ext_resource type="Texture2D" path="res://assets/player_attack_3.png" id="19_attack_3"]
+[ext_resource type="Texture2D" path="res://assets/player_attack_4.png" id="20_attack_4"]
+[ext_resource type="Texture2D" path="res://assets/player_attack_5.png" id="21_attack_5"]
+
+[ext_resource type="Script" path="res://player_footsteps.gd" id="22_footsteps"]
+[ext_resource type="AudioStream" path="res://assets/grass_step_1.wav" id="23_step1"]
+[ext_resource type="AudioStream" path="res://assets/grass_step_2.wav" id="24_step2"]
+[ext_resource type="AudioStream" path="res://assets/grass_step_3.wav" id="25_step3"]
+[ext_resource type="AudioStream" path="res://assets/grass_step_4.wav" id="26_step4"]
+
+[ext_resource type="AudioStream" path="res://assets/landing_thump.mp3" id="27_landing"]
+
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_player"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_texture")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_run_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_run_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_run_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_texture")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_run_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_run_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_run_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_run_1")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_armed_idle")
+}],
+"loop": true,
+"name": &"idle_armed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_armed_run_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_armed_run_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_armed_run_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_armed_idle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_armed_run_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_armed_run_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_armed_run_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_armed_run_1")
+}],
+"loop": true,
+"name": &"run_armed",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_texture")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jump_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_jump_2")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_armed_idle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_jump_armed_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_jump_armed_2")
+}],
+"loop": false,
+"name": &"jump_armed",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_armed_idle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_attack_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_attack_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_attack_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_attack_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_attack_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_attack_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_attack_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_attack_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_attack_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_armed_idle")
+}],
+"loop": false,
+"name": &"attack_armed",
+"speed": 15.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
-size = Vector2(56.4, 101.4)
+resource_local_to_scene = true
+size = Vector2(36.3, 112.35)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_script")
 floor_snap_length = 14.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_texture")
-scale = Vector2(0.6, 0.6)
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_player")
+animation = &"idle"
+scale = Vector2(0.15, 0.15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3.3, -8.4)
+position = Vector2(-0.975, -7.2)
 shape = SubResource("RectangleShape2D_player")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -28,61 +200,33 @@ limit_bottom = 1080
 process_callback = 0
 position_smoothing_enabled = false
 
-[node name="DeathScreenLayer" type="CanvasLayer" parent="."]
-visible = false
-layer = 10
+[node name="AttackPromptAnchor" type="Node2D" parent="."]
+position = Vector2(180, -65)
 
-[node name="DeathScreen" type="TextureRect" parent="DeathScreenLayer"]
-layout_mode = 1
-texture = ExtResource("3_death_screen")
-expand_mode = 1
-stretch_mode = 6
+[node name="AttackPrompt" type="Label" parent="AttackPromptAnchor"]
+visible = false
+offset_left = -120.0
+offset_top = -24.0
+offset_right = 120.0
+offset_bottom = 24.0
 mouse_filter = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
+theme_override_colors/font_color = Color(0.65, 0.015, 0.035, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 40
+text = "F to attack"
+horizontal_alignment = 1
 
-[node name="CompletionScreenLayer" type="CanvasLayer" parent="."]
+[node name="DeathScreenLayer" parent="." instance=ExtResource("3_death_screen")]
 visible = false
-layer = 11
-process_mode = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="CompletionScreenLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="GrassFootsteps" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("animated_sprite", "body")]
+volume_db = -22.0
+script = ExtResource("22_footsteps")
+animated_sprite = NodePath("../Sprite2D")
+body = NodePath("..")
+step_sounds = Array[AudioStream]([ExtResource("23_step1"), ExtResource("24_step2"), ExtResource("25_step3"), ExtResource("26_step4")])
 
-[node name="CompletionScreen" type="PanelContainer" parent="CompletionScreenLayer/CenterContainer"]
-custom_minimum_size = Vector2(560, 300)
-
-[node name="Panel" type="MarginContainer" parent="CompletionScreenLayer/CenterContainer/CompletionScreen"]
-theme_override_constants/margin_left = 48
-theme_override_constants/margin_top = 36
-theme_override_constants/margin_right = 48
-theme_override_constants/margin_bottom = 36
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CompletionScreenLayer/CenterContainer/CompletionScreen/Panel"]
-theme_override_constants/separation = 24
-
-[node name="TitleLabel" type="Label" parent="CompletionScreenLayer/CenterContainer/CompletionScreen/Panel/VBoxContainer"]
-text = "Level completed"
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 42
-
-[node name="TimeLabel" type="Label" parent="CompletionScreenLayer/CenterContainer/CompletionScreen/Panel/VBoxContainer"]
-text = "Time: 00:00.00"
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 28
-
-[node name="RestartButton" type="Button" parent="CompletionScreenLayer/CenterContainer/CompletionScreen/Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
-text = "Restart"
-theme_override_font_sizes/font_size = 24
-
-[connection signal="pressed" from="CompletionScreenLayer/CenterContainer/CompletionScreen/Panel/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[node name="LandingThump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("27_landing")
+volume_db = -3.0
