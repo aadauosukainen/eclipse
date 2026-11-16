@@ -92,6 +92,9 @@ func _restart() -> void:
 func _next_level() -> void:
 	pass
 
+func _exit_game() -> void:
+	get_tree().quit()
+
 func _on_music_volume_changed(value: float) -> void:
 	music_volume = value
 	music_value.text = "%d%%" % int(value)

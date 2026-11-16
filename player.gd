@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal died
+
 const ATTACK_RANGE: float = 180.0
 const ATTACK_LAST_FRAME: int = 10
 const ATTACK_MOVEMENT_FRAME_COUNT: int = 2
@@ -199,6 +201,7 @@ func _respawn() -> void:
 		return
 
 	is_respawning = true
+	died.emit()
 	is_jumping = false
 	is_attacking = false
 	velocity = Vector2.ZERO

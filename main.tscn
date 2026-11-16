@@ -371,3 +371,5 @@ volume_db = -28.0
 autoplay = true
 
 [editable path="LevelGeometry/FirstPlatformMessage"]
+
+[connection signal="died" from="Actors/Player" to="Background" method="_on_player_died"]
