@@ -1,1 +1,1 @@
-This game is a short singleplayer adventure/horro/puzzle game. It is set in the rainforests of Krios, and you play as Karla, a soldier from the tundra trying to clear the infection blooms from the jungle in order to escape.
+This game is a short singleplayer adventure/horror/puzzle game. It is set in the rainforests of Krios, and you play as Karla, a soldier from the tundra trying to clear the infection blooms from the jungle in order to escape.
