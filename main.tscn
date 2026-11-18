@@ -221,16 +221,6 @@ polygon = PackedVector2Array(0, 1080, 498, 1080, 590, 944, 590, 940, 642, 914, 6
 [node name="GroundPlatformCollision4" type="CollisionPolygon2D" parent="LevelGeometry/GroundAsset" unique_id=1377934405]
 polygon = PackedVector2Array(1040, 891, 1057, 971, 1057, 973, 1101, 1000, 1102, 1000, 1148, 1079, 1148, 1080, 3194, 1080, 3257, 980, 3257, 975, 3351, 912, 3352, 912, 3344, 890, 3344, 889, 1040, 885)
 
-[node name="PortalStructure" parent="LevelGeometry" unique_id=1754339342 instance=ExtResource("27_portal_structure")]
-position = Vector2(-201, 76)
-
-[node name="Sprite2D" parent="LevelGeometry/PortalStructure" index="0"]
-position = Vector2(2, -3)
-
-[node name="PostCollision" parent="LevelGeometry/PortalStructure" index="1"]
-position = Vector2(131, 792)
-rotation = -1.5680128
-
 [node name="RedPortalHue" type="Sprite2D" parent="LevelGeometry" unique_id=1918736495]
 position = Vector2(5987, 17)
 scale = Vector2(1.19, 1.19)
@@ -240,17 +230,6 @@ flip_h = true
 
 [node name="RedPortalTrigger" parent="LevelGeometry/RedPortalHue" unique_id=1474846661 instance=ExtResource("34_red_portal")]
 position = Vector2(290, 212)
-
-[node name="PortalStructure2" parent="LevelGeometry" unique_id=1032334669 instance=ExtResource("27_portal_structure")]
-position = Vector2(6602, -376)
-scale = Vector2(-1, 1)
-
-[node name="Sprite2D" parent="LevelGeometry/PortalStructure2" index="0"]
-position = Vector2(2, -3)
-
-[node name="PostCollision" parent="LevelGeometry/PortalStructure2" index="1"]
-position = Vector2(131, 792)
-rotation = -1.5680128
 
 [node name="BluePortalHue" type="Sprite2D" parent="LevelGeometry" unique_id=1990545453]
 position = Vector2(-190.99998, 434.99997)
@@ -362,6 +341,28 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(2308, 783)
 scale = Vector2(-0.5, 0.5)
 
+[node name="PortalStructure2" parent="." unique_id=1032334669 instance=ExtResource("27_portal_structure")]
+position = Vector2(6602, -376)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+
+[node name="Sprite2D" parent="PortalStructure2" index="0"]
+position = Vector2(2, -3)
+
+[node name="PostCollision" parent="PortalStructure2" index="1"]
+position = Vector2(131, 792)
+rotation = -1.5680128
+
+[node name="PortalStructure" parent="." unique_id=1754339342 instance=ExtResource("27_portal_structure")]
+position = Vector2(-201, 76)
+
+[node name="Sprite2D" parent="PortalStructure" index="0"]
+position = Vector2(2, -3)
+
+[node name="PostCollision" parent="PortalStructure" index="1"]
+position = Vector2(131, 792)
+rotation = -1.5680128
+
 [node name="Portals" type="Node2D" parent="." unique_id=1625588355]
 
 [node name="GameScreens" parent="." unique_id=1721667407 node_paths=PackedStringArray("music_player") instance=ExtResource("33_screens")]
@@ -382,7 +383,7 @@ death_stream = ExtResource("37_ambience")
 [connection signal="died" from="Actors/Player" to="Background" method="_on_player_died"]
 [connection signal="died" from="Actors/Player" to="EnvironmentAmbience" method="_on_player_died"]
 
-[editable path="LevelGeometry/PortalStructure"]
-[editable path="LevelGeometry/PortalStructure2"]
 [editable path="LevelGeometry/FirstPlatformMessage"]
 [editable path="Actors/Player"]
+[editable path="PortalStructure2"]
+[editable path="PortalStructure"]
